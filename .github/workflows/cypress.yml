@@ -1,0 +1,41 @@
+name: Cypress
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-run:
+    name: Run Cypress Test
+    # https://github.com/actions/virtual-environments
+    runs-on: ubuntu-20.04
+    # https://hub.docker.com/r/cypress/browsers/tags
+    # https://docs.cypress.io/examples/examples/docker.html#Images
+    container: cypress/browsers:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install a project with a clean slate
+        run: |
+          npm ci
+          $(npm bin)/cypress cache path
+          $(npm bin)/cypress cache list
+          $(npm bin)/cypress verify
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./
+          env: host=localhost,port=8100
+          browser: chrome
+          headless: false
+          record: true
+          parallel: true
+          start: npm start
+          wait-on: http://localhost:8100
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
