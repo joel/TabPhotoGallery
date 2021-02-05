@@ -6,17 +6,18 @@ import {
   IonToolbar,
   IonFab,
   IonFabButton,
-  IonIcon
+  IonIcon,
+  IonGrid,
+  IonCol,
+  IonRow,
+  IonImg,
 } from '@ionic/react';
 import { camera } from 'ionicons/icons';
-import ExploreContainer from '../components/ExploreContainer';
+import { usePhotoGallery } from '../hooks/usePhotoGallery';
 import './Tab2.css';
 
 const Tab2: React.FC = () => {
-
-  const takePhoto = () => {
-    console.log('takePhoto');
-  };
+  const { photos, takePhoto } = usePhotoGallery();
 
   return (
     <IonPage>
@@ -26,8 +27,17 @@ const Tab2: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonFab vertical='bottom' horizontal='center' slot='fixed'>
-          <IonFabButton onClick={() => takePhoto()}>
+        <IonGrid>
+          <IonRow>
+            {photos.map((photo, index) => (
+              <IonCol size='6' key={index}>
+                <IonImg src={photo.webviewPath} />
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+        <IonFab vertical='bottom' horizontal='end' slot='fixed'>
+          <IonFabButton onClick={() => takePhoto()} id='take-picture-action'>
             <IonIcon icon={camera}></IonIcon>
           </IonFabButton>
         </IonFab>
