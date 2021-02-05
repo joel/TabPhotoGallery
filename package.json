@@ -56,5 +56,10 @@
   "devDependencies": {
     "@capacitor/cli": "2.4.6",
     "cypress": "^6.4.0"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-hooks)"
+    ]
   }
 }
