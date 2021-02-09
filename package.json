@@ -7,7 +7,7 @@
     "@capacitor/core": "2.4.6",
     "@capacitor/ios": "^2.4.6",
     "@ionic/pwa-elements": "^3.0.2",
-    "@ionic/react": "^5.5.0",
+    "@ionic/react": "^5.5.4",
     "@ionic/react-hooks": "^0.0.8",
     "@ionic/react-router": "^5.5.0",
     "@testing-library/jest-dom": "^5.11.4",
