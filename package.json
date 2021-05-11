@@ -55,7 +55,7 @@
   "description": "An Ionic project",
   "devDependencies": {
     "@capacitor/cli": "2.4.6",
-    "cypress": "^6.4.0"
+    "cypress": "^7.3.0"
   },
   "jest": {
     "transformIgnorePatterns": [
